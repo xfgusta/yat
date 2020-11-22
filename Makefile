@@ -5,7 +5,7 @@ install:
 	install -m 0755 yat /usr/local/bin/yat
 
 uninstall:
-	rm -f /usr/bin/local/yat
+	rm -f /usr/local/bin/yat
 
 clean:
 	rm -f yat
