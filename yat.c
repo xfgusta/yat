@@ -21,8 +21,7 @@ int main(int argc, char **argv) {
 }
 
 void ident(short level) {
-    level *= 2;
-    for(;level--;)
+    for(level *= 2; level--;)
         putchar(' ');
 }
 
