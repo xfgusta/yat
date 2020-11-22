@@ -27,7 +27,8 @@ void ident(short level) {
 }
 
 int tree(char **paths) {
-    FTS *fts = fts_open(paths, FTS_COMFOLLOW | FTS_LOGICAL | FTS_NOSTAT, 0);
+    int options = FTS_COMFOLLOW | FTS_LOGICAL | FTS_NOSTAT;
+    FTS *fts = fts_open(paths, options, 0);
     if(!fts)
         return 1;
     size_t ndir = 0, nfile = 0;
@@ -35,7 +36,8 @@ int tree(char **paths) {
     while((file = fts_read(fts))) {
         if(file->fts_info == FTS_ERR)
             return 1;
-        if(file->fts_namelen >= 2 && file->fts_name[0] == '.' && file->fts_name[1] != '.') {
+        if(file->fts_namelen >= 2 && file->fts_name[0] == '.'
+                                  && file->fts_name[1] != '.') {
             fts_set(fts, file, FTS_SKIP);
             continue;
         }
@@ -56,6 +58,8 @@ int tree(char **paths) {
         }
     }
     fts_close(fts);
-    printf("\n%zu director%s, %zu file%s\n", ndir, ndir == 1 ? "y" : "ies", nfile, nfile == 1 ? "" : "s");
-    return 0;
+    printf("\n%zu director%s, %zu file%s\n",
+        ndir, ndir == 1 ? "y" : "ies",
+        nfile, nfile == 1 ? "" : "s");
+     return 0;
 }
