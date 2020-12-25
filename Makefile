@@ -1,11 +1,12 @@
-all:
-	cc yat.c -o yat
+yat:
+	gcc yat.c -o yat
 
 install:
-	install -m 0755 yat /usr/local/bin/yat
+	mkdir -p $(DESTDIR)/usr/bin
+	install -m 0755 yat $(DESTDIR)/usr/bin/yat
 
 uninstall:
-	rm -f /usr/local/bin/yat
+	rm -f $(DESTDIR)/usr/bin/yat
 
 clean:
 	rm -f yat
